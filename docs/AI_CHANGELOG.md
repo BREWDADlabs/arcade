@@ -15,3 +15,11 @@
 - **Tests:** secrets scan of every tracked file was clean, with no 32-hex IDs left.
 - **Deploy:** none. The site is deployed separately with Wrangler (Websites bot).
 - **Rollback:** revert the commit.
+
+## 2026-11-04 6:27 PM ET, Websites bot (nav back to brewdadlabs.com, preview)
+- **Goal:** Randy: "the disconnect with arcade and no clear way back to the main page".
+- **Files:** site/index.html, docs/AI_HANDOFF.md, docs/AI_CHANGELOG.md
+- **Summary:** sticky header with `← BREWDADLABS` brand + HOME / PROJECTS / ARCADE nav linking to brewdadlabs.com; matching footer links; `← EXIT TO THE WORKSHOP` row under the module menu; intro ends with a link home; Matrix Terminal `home`/`exit`/`cd ~` and `map` commands; main-site grid background, vignette and 980px column; data: favicon. Games untouched.
+- **Tests:** headless Chromium (system Chrome) at 1280x800 and 390x844, local and on the preview: zero third-party requests, no console or page errors, brand link visible at top, during each of the 4 games and at the bottom, and it navigates to https://brewdadlabs.com/ (click and tap); terminal `home` navigates there too; Snake responds to arrows (no page scroll) and `p` pauses; Matrix `help` lists home; Circuit tile rotates on click/tap; Defender moves/fires on keys and the touch pad; Escape closes a game; game stage sits below the sticky header.
+- **Deploy:** preview branch only (https://preview.brewdadlabs-arcade.pages.dev). No production deploy, no push.
+- **Rollback:** delete branch `nav-home`; production is untouched.

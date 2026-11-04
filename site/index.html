@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>BREWDADLABS // ARCADE</title>
+<style>@font-face{font-family:'Share Tech Mono';font-style:normal;font-weight:400;font-display:swap;src:url(/fonts/ShareTechMono-Regular.woff2) format('woff2')}</style>
+<style>
+:root{--bg:#020303;--panel:#080d0c;--raised:#101816;--border:#18352c;--green:#00ff9c;--gd:#00a878;--cyan:#00d9ff;--amber:#ffb86c;--purple:#bd93f9;--red:#ff5555;--text:#d6e5df;--muted:#81938b;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:64px}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.5 system-ui,sans-serif;overflow-x:hidden}
+body::after{content:"";position:fixed;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(0,0,0,.18) 0 1px,transparent 1px 3px);opacity:.5}
+.m,button,h1,h2,h3,nav a{font-family:'Share Tech Mono',ui-monospace,Menlo,Consolas,monospace}
+header{position:sticky;top:0;z-index:5;background:#020303ee;border-bottom:1px solid var(--border);display:flex;flex-wrap:wrap;gap:8px 20px;align-items:center;justify-content:space-between;padding:10px 16px}
+header b{color:var(--green);text-shadow:0 0 8px #00ff9c66;letter-spacing:.06em}
+nav{display:flex;gap:4px}nav a{color:var(--muted);text-decoration:none;padding:10px 10px;font-size:14px}nav a:hover,nav a:focus-visible{color:var(--cyan);outline:none;text-shadow:0 0 6px var(--cyan)}
+main{max-width:1000px;margin:0 auto;padding:0 16px 40px}
+section{padding:28px 0}h2{color:var(--green);font-weight:400;font-size:20px;margin:0 0 14px}
+#term{background:var(--panel);border:1px solid var(--border);padding:16px;min-height:250px;color:var(--green);white-space:pre-wrap;font-size:15px;margin-top:20px;position:relative}
+#term .w{color:var(--cyan)}#term .a{color:var(--amber)}
+.cur{display:inline-block;width:.6em;height:1em;background:var(--green);vertical-align:-2px;animation:bl 1s steps(1) infinite}
+@keyframes bl{50%{opacity:0}}
+button{background:var(--raised);color:var(--text);border:1px solid var(--border);padding:12px 16px;font-size:15px;cursor:pointer;min-height:44px;border-radius:2px}
+button:hover,button:focus-visible{border-color:var(--ac,var(--green));color:var(--ac,var(--green));outline:none}
+#skip{position:absolute;right:8px;top:8px;min-height:36px;padding:6px 10px;font-size:13px;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+.card{background:var(--panel);border:1px solid var(--border);border-top:3px solid var(--ac);padding:14px;display:flex;flex-direction:column;gap:8px}
+.card h3{margin:0;color:var(--ac);font-weight:400;font-size:17px}.card p{margin:0;font-size:14px;color:var(--muted);flex:1}
+.art{height:70px;background:#000;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--ac);font-size:22px;letter-spacing:4px;text-shadow:0 0 10px var(--ac);overflow:hidden}
+.st{font-size:12px;color:var(--muted)}.st i{font-style:normal;color:var(--ac)}
+#play{border:1px solid var(--border);background:var(--panel);padding:12px;scroll-margin-top:70px}
+.bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:10px}.bar b{color:var(--green);font-weight:400;margin-right:auto}.bar span{color:var(--amber)}.bar button{padding:8px 12px;min-height:44px}
+#stage{display:flex;flex-direction:column;align-items:center;gap:10px}
+canvas{display:block;max-width:100%;background:#000;border:1px solid var(--border);box-shadow:0 0 18px #00ff9c22}
+.pad{display:flex;gap:10px;width:100%;max-width:440px}.pad button{flex:1;min-height:56px;font-size:18px;touch-action:none;user-select:none}
+.cg{display:grid;gap:4px;width:min(100%,420px);touch-action:manipulation}.t{aspect-ratio:1;padding:0;background:#000;border:1px solid var(--border)}
+.t svg{width:100%;height:100%;pointer-events:none}.t.on{border-color:var(--green);box-shadow:0 0 10px #00ff9c55 inset}
+.win{color:var(--green);animation:bl .6s 3}
+#tout{width:100%;max-width:640px;background:#000b;border:1px solid var(--border);padding:10px;height:190px;overflow:auto;color:var(--green);font:14px/1.4 'Share Tech Mono',monospace;white-space:pre-wrap}
+#tin{width:100%;max-width:640px;background:#000;color:var(--green);border:1px solid var(--border);padding:12px;font:16px 'Share Tech Mono',monospace}
+.about p{max-width:65ch}
+footer{border-top:1px solid var(--border);padding:18px 16px;text-align:center;color:var(--muted);font-size:13px}
+a{color:var(--cyan)}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;scroll-behavior:auto!important}}
+</style></head><body>
+<header><b class="m">BREWDADLABS // ARCADE</b>
+<nav><a href="#arcade">ARCADE</a><a href="#about">ABOUT</a><a href="#projects">PROJECTS</a><a href="https://github.com/BrewDadLabs" rel="noopener">GITHUB</a></nav>
+<button id="snd" class="m" aria-pressed="false" style="min-height:40px;padding:6px 12px">SOUND: OFF</button></header>
+<main>
+<div id="term" class="m" aria-live="polite"><button id="skip">SKIP</button><span id="tx"></span><span class="cur"></span></div>
+<section id="arcade"><h2 class="m">SELECT MODULE</h2><div class="grid" id="cards"></div></section>
+<section id="play" hidden aria-label="Game"><div class="bar"><b class="m" id="pt"></b><span class="m" id="ps"></span><button id="pp">PAUSE</button><button id="pr">RESTART</button><button id="px">CLOSE</button></div><div id="stage"></div></section>
+<section id="about" class="about"><h2 class="m">ABOUT THE WORKSHOP</h2><p>Built at home. Tested in the real world. People before profit.</p><p>BrewDadLabs is an independent developer, husband and homeschooling dad who thinks software should serve people. This arcade has no ads, no trackers, no accounts and no subscriptions. High scores stay in your browser.</p></section>
+<section id="projects"><h2 class="m">PROJECTS</h2><p>More tools live at <a href="https://github.com/BrewDadLabs" rel="noopener">github.com/BrewDadLabs</a>.</p></section>
+</main>
+<footer class="m">root@brewdadlabs:~$ ./build-something-useful.sh</footer>
+<script>
+(()=>{
+const $=s=>document.querySelector(s),mk=(t,p={})=>Object.assign(document.createElement(t),p);
+const RM=matchMedia('(prefers-reduced-motion:reduce)').matches;
+const ls={get:k=>{try{return localStorage.getItem('bdl-'+k)}catch(e){return null}},set:(k,v)=>{try{localStorage.setItem('bdl-'+k,v)}catch(e){}}};
+// ---- audio (off by default, created only on user click)
+let AC=null,sndOn=false;
+const beep=(f=440,d=.08,ty='square')=>{if(!sndOn||!AC)return;const o=AC.createOscillator(),g=AC.createGain();o.type=ty;o.frequency.value=f;g.gain.value=.05;g.gain.exponentialRampToValueAtTime(.001,AC.currentTime+d);o.connect(g).connect(AC.destination);o.start();o.stop(AC.currentTime+d)};
+$('#snd').onclick=e=>{sndOn=!sndOn;if(sndOn&&!AC)AC=new(window.AudioContext||window.webkitAudioContext)();e.target.textContent='SOUND: '+(sndOn?'ON':'OFF');e.target.setAttribute('aria-pressed',sndOn);beep(600)};
+// ---- intro
+const L=["root@brewdadlabs:~$ ./start-arcade.sh","Initializing arcade...","Loading game modules...","Checking system integrity...","<span class=w>No ads detected.</span>","<span class=w>No trackers detected.</span>","<span class=w>No subscriptions required.</span>","<span class=a>SYSTEM READY.</span>","Welcome to the workshop."];
+let li=0,tm;const tx=$('#tx');
+const showAll=()=>{clearTimeout(tm);tx.innerHTML=L.join('\n');$('#skip').hidden=true};
+(function nx(){if(li>=L.length){$('#skip').hidden=true;return}tx.innerHTML=L.slice(0,++li).join('\n');tm=setTimeout(nx,380)})();
+if(RM)showAll();$('#skip').onclick=showAll;
+// ---- helpers
+const keyset=(map,down,up)=>{const kd=e=>{const a=map[e.key.toLowerCase()];if(a!==undefined){e.preventDefault();down(a,e)}},ku=e=>{const a=map[e.key.toLowerCase()];if(a!==undefined)up&&up(a)};addEventListener('keydown',kd);addEventListener('keyup',ku);return()=>{removeEventListener('keydown',kd);removeEventListener('keyup',ku)}};
+const loop=fn=>{let r,l=performance.now(),dead=false;const f=t=>{if(dead)return;r=requestAnimationFrame(f);fn(Math.min(t-l,100),t);l=t};r=requestAnimationFrame(f);return()=>{dead=true;cancelAnimationFrame(r)}};
+// ---- 01 SNAKE
+function snake(st,sc){const N=20,c=mk('canvas',{width:440,height:440});c.style.cssText='width:100%;max-width:440px;touch-action:none';st.append(c);const x=c.getContext('2d'),u=440/N,K='bdl-snake';
+let s,d,nd,f,score,over,paused,acc,hi=+ls.get(K)||0;
+const spawn=()=>{do f=[Math.random()*N|0,Math.random()*N|0];while(s.some(p=>p[0]==f[0]&&p[1]==f[1]))};
+const reset=()=>{s=[[10,10],[9,10],[8,10]];d=nd=[1,0];score=0;over=paused=false;acc=0;spawn();upd()};
+const upd=()=>sc('SCORE '+score+'  HI '+hi);
+const step=()=>{d=nd;const h=[s[0][0]+d[0],s[0][1]+d[1]];if(h[0]<0||h[1]<0||h[0]>=N||h[1]>=N||s.some(p=>p[0]==h[0]&&p[1]==h[1])){over=true;beep(120,.3,'sawtooth');if(score>hi){hi=score;ls.set('snake',hi)}upd();return}s.unshift(h);if(h[0]==f[0]&&h[1]==f[1]){score+=10;beep(880,.06);spawn();upd()}else s.pop()};
+const dir=a=>{if(a[0]+d[0]||a[1]+d[1])nd=a};
+const un=keyset({arrowup:[0,-1],w:[0,-1],arrowdown:[0,1],s:[0,1],arrowleft:[-1,0],a:[-1,0],arrowright:[1,0],d:[1,0]},dir);
+let tx0,ty0;c.ontouchstart=e=>{tx0=e.touches[0].clientX;ty0=e.touches[0].clientY;e.preventDefault()};
+c.ontouchend=e=>{const t=e.changedTouches[0],dx=t.clientX-tx0,dy=t.clientY-ty0;if(Math.max(Math.abs(dx),Math.abs(dy))<20){if(over)reset();return}dir(Math.abs(dx)>Math.abs(dy)?[Math.sign(dx),0]:[0,Math.sign(dy)])};
+c.ontouchmove=e=>e.preventDefault();c.onclick=()=>over&&reset();
+const stop=loop(dt=>{if(!over&&!paused){acc=Math.min(acc+dt,500);const ms=Math.max(60,140-score*1.2);while(acc>=ms){acc-=ms;step();if(over)break}}
+x.fillStyle='#000';x.fillRect(0,0,440,440);x.strokeStyle='#0c2a20';for(let i=0;i<=N;i++){x.beginPath();x.moveTo(i*u,0);x.lineTo(i*u,440);x.moveTo(0,i*u);x.lineTo(440,i*u);x.stroke()}
+x.shadowBlur=10;x.shadowColor='#00d9ff';x.fillStyle='#00d9ff';x.fillRect(f[0]*u+4,f[1]*u+4,u-8,u-8);x.shadowColor='#00ff9c';s.forEach((p,i)=>{x.fillStyle=i?'#00c27a':'#00ff9c';x.fillRect(p[0]*u+1,p[1]*u+1,u-2,u-2)});x.shadowBlur=0;
+if(over||paused){x.fillStyle='#000a';x.fillRect(0,0,440,440);x.textAlign='center';x.font='28px monospace';x.fillStyle=over?'#ff5555':'#ffb86c';x.fillText(over?'GAME OVER':'PAUSED',220,215);x.font='16px monospace';x.fillStyle='#d6e5df';x.fillText(over?'tap or press Restart':'press Resume',220,245)}});
+reset();return{pause:()=>!over&&(paused=!paused),restart:reset,stop(){stop();un()}}}
+// ---- 02 MATRIX
+function matrix(st,sc){sc('');const c=mk('canvas',{width:640,height:240});c.style.cssText='width:100%;max-width:640px';const out=mk('div',{id:'tout'}),inp=mk('input',{id:'tin',placeholder:'type help',autocomplete:'off',autocapitalize:'off',spellcheck:false,'aria-label':'terminal'});st.append(c,out,inp);
+const x=c.getContext('2d'),sets=['01','ｱｲｳｴｵｶｷｸｹｺ','ABCDEF0123456789','<>{}[]/\\|'];let set=0,cols=[],paused=false;
+const init=()=>{cols=Array.from({length:Math.floor(640/14)},()=>({y:Math.random()*-20,v:.3+Math.random()*.9}))};init();
+const P='root@brewdadlabs:~$ ';const pr=t=>{out.textContent+=t+'\n';out.scrollTop=1e9};
+const cmd={help:()=>'COMMANDS: help whoami date system projects privacy clear matrix',whoami:()=>'BREWDAD. Husband. Father. Homeschooling dad. Independent developer.',date:()=>new Date().toString(),system:()=>'OS:       WORKSHOP 1999 (modernized)\nCPU:      one tired coffee-fueled dad\nADS:      NONE\nTRACKERS: NONE',projects:()=>'terminal-snake   circuit-breaker   system-defender\nmore: github.com/BrewDadLabs',privacy:()=>'TRACKING:      DISABLED\nAD NETWORKS:   NONE\nDATA BROKERS:  NOT INVITED\nUSER CONSENT:  REQUIRED\nPeople are not products.',clear:()=>{out.textContent='';return null},matrix:()=>{set=(set+1)%sets.length;return'Character set changed. Wake up.'}};
+pr('BrewDadLabs terminal. Type help.');
+inp.onkeydown=e=>{if(e.key!='Enter')return;const v=inp.value.trim().toLowerCase();inp.value='';pr(P+v);if(!v)return;const r=cmd[v];if(r){const o=r();if(o!=null)pr(o)}else pr('command not found: '+v+' (try help)')};
+const fps=RM?0:20;let acc=0;const draw=()=>{x.fillStyle='rgba(0,0,0,.14)';x.fillRect(0,0,640,240);x.font='14px monospace';const cs=sets[set];cols.forEach((o,i)=>{const r=Math.random(),ch=cs[Math.random()*cs.length|0];x.fillStyle=r<.03?'#00d9ff':r<.05?'#ffb86c':'#00ff9c';x.fillText(ch,i*14,o.y*14);o.y+=o.v;if(o.y*14>260&&Math.random()>.97)o.y=0})};
+const stop=loop(dt=>{if(paused)return;acc+=dt;if(fps&&acc<1000/fps)return;acc=0;draw()});if(RM)for(let i=0;i<30;i++)draw();
+return{pause:()=>paused=!paused,restart:()=>{init();out.textContent='';pr('Terminal reset.')},stop}}
+// ---- 03 CIRCUIT BREAKER
+function circuit(st,sc){const bar=mk('div',{className:'bar'});const cg=mk('div',{className:'cg'});st.append(bar,cg);
+let n=4,seed=Date.now()%1e6,mv=0,t0=Date.now(),won=false,g,tick;
+const rnd=s=>()=>{s|=0;s=s+0x6D2B79F5|0;let t=Math.imul(s^s>>>15,1|s);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296};
+const D=[[0,-1,1,4],[1,0,2,8],[0,1,4,1],[-1,0,8,2]],rot=m=>((m<<1)|(m>>3))&15,pc=m=>[...Array(4)].filter((_,i)=>m>>i&1).length;
+function gen(sd){const R=rnd(sd);for(;;){const vis=new Set(['0,0']),path=[[0,0]];const dfs=()=>{const [px,py]=path[path.length-1];if(px==n-1&&py==n-1)return true;const o=[0,1,2,3].sort(()=>R()-.5);for(const i of o){const a=px+D[i][0],b=py+D[i][1],k=a+','+b;if(a<0||b<0||a>=n||b>=n||vis.has(k))continue;vis.add(k);path.push([a,b]);if(dfs())return true;path.pop()}return false};
+if(!dfs()||path.length<n+2)continue;const m=Array.from({length:n},()=>Array(n).fill(0));
+for(let i=0;i<path.length;i++){const[a,b]=path[i];for(const q of [path[i-1],path[i+1]])if(q)for(const d of D)if(a+d[0]==q[0]&&b+d[1]==q[1])m[b][a]|=d[2]}
+for(let y=0;y<n;y++)for(let x=0;x<n;x++)if(!m[y][x])m[y][x]=[5,3,7][R()*3|0];
+const sol=m.map(r=>r.slice());for(const r of m)for(let x=0;x<n;x++)for(let k=R()*4|0;k>0;k--)r[x]=rot(r[x]);return{m,sol}}}
+function lit(){const s=new Set(['0,0']),q=[[0,0]];while(q.length){const[x,y]=q.pop();for(const d of D){const a=x+d[0],b=y+d[1];if(a<0||b<0||a>=n||b>=n||s.has(a+','+b))continue;if(g[y][x]&d[2]&&g[b][a]&d[3]){s.add(a+','+b);q.push([a,b])}}}return s}
+const svg=(m,on)=>{const col=on?'#00ff9c':'#00a878',l=[[50,0],[100,50],[50,100],[0,50]].map((p,i)=>m>>i&1?`<line x1=50 y1=50 x2=${p[0]} y2=${p[1]} />`:'').join('');return`<svg viewBox="0 0 100 100" stroke="${col}" stroke-width="12" stroke-linecap="round">${l}<circle cx=50 cy=50 r=${pc(m)>2?12:6} fill="${col}" stroke="none"/></svg>`};
+function render(){const L=lit(),w=L.has((n-1)+','+(n-1));cg.style.gridTemplateColumns=`repeat(${n},1fr)`;cg.innerHTML='';g.forEach((r,y)=>r.forEach((m,x)=>{const b=mk('button',{className:'t'+(L.has(x+','+y)?' on':''),innerHTML:svg(m,L.has(x+','+y)),ariaLabel:'tile '+(x+1)+','+(y+1)});if(x==0&&y==0)b.style.outline='2px solid #ffb86c';if(x==n-1&&y==n-1)b.style.outline='2px solid #00d9ff';b.onclick=()=>{if(won)return;g[y][x]=rot(g[y][x]);mv++;beep(300,.04);render()};cg.append(b)}));
+if(w&&!won){won=true;beep(900,.25,'sine');cg.classList.add('win');info('CIRCUIT CONNECTED!')}else if(!w){cg.classList.remove('win')}else info('CIRCUIT CONNECTED!')}
+const info=m=>sc((m||'')+' MOVES '+mv+'  TIME '+Math.floor((Date.now()-t0)/1000)+'s');
+function neu(sd){seed=sd??(Math.random()*1e6|0);const r=gen(seed);g=r.m;window.__sol=r.sol;mv=0;won=false;t0=Date.now();render();info('SEED '+seed+' ')}
+[['EASY',4],['MEDIUM',5],['HARD',6]].forEach(([l,k])=>bar.append(mk('button',{textContent:l,onclick:()=>{n=k;neu()}})));bar.append(mk('button',{textContent:'NEW PUZZLE',onclick:()=>neu()}));
+tick=setInterval(()=>{if(!won&&!document.hidden)info('')},1000);let orig;neu();orig=g.map(r=>r.slice());
+return{pause:()=>{},restart:()=>{g=window.__sol?g:g;neu(seed)},stop:()=>clearInterval(tick)}}
+// ---- 04 SYSTEM DEFENDER
+function defender(st,sc){const W=320,H=440,c=mk('canvas',{width:W,height:H});c.style.cssText='width:100%;max-width:360px;touch-action:none';const pad=mk('div',{className:'pad'});st.append(c,pad);const x=c.getContext('2d');
+let px,bl,en,lv,score,over,paused,sp,cd,flash,mvL,mvR,hi=+ls.get('def')||0;
+const reset=()=>{px=W/2;bl=[];en=[];lv=3;score=0;over=paused=false;sp=0;cd=0;flash=0;upd()};
+const upd=()=>sc('SCORE '+score+'  LIVES '+lv+'  HI '+hi);
+const fire=()=>{if(over||paused||cd>0)return;bl.push([px,H-50]);cd=220;beep(700,.05)};
+const hold=(l,fn,fu)=>{const b=mk('button',{textContent:l});b.onpointerdown=e=>{e.preventDefault();fn()};b.onpointerup=b.onpointerleave=b.onpointercancel=fu||(()=>{});pad.append(b);return b};
+hold('◀',()=>mvL=1,()=>mvL=0);let fb=hold('FIRE',()=>{fire();fb._i=setInterval(fire,230)},()=>clearInterval(fb._i));hold('▶',()=>mvR=1,()=>mvR=0);
+const un=keyset({arrowleft:'l',a:'l',arrowright:'r',d:'r',' ':'f'},(a)=>{a=='l'?mvL=1:a=='r'?mvR=1:fire()},(a)=>{a=='l'?mvL=0:a=='r'&&(mvR=0)});
+c.onclick=()=>over&&reset();
+const stop=loop(dt=>{if(!over&&!paused){const lvl=1+score/150;px=Math.min(W-14,Math.max(14,px+(mvR-mvL)*dt*.25));cd-=dt;sp-=dt;if(sp<=0){sp=Math.max(350,1100-lvl*70);en.push([20+Math.random()*(W-40),-10,.04+lvl*.012])}
+bl.forEach(b=>b[1]-=dt*.4);bl=bl.filter(b=>b[1]>-5);en.forEach(e=>e[1]+=dt*e[2]);
+en=en.filter(e=>{if(bl.some((b,i)=>Math.abs(b[0]-e[0])<14&&Math.abs(b[1]-e[1])<14&&(bl.splice(i,1),true))){score+=10;beep(200,.08,'sawtooth');upd();return false}
+if(e[1]>H-28){lv--;flash=200;beep(90,.25,'sawtooth');if(lv<=0){over=true;if(score>hi){hi=score;ls.set('def',hi)}}upd();return false}return true});flash=Math.max(0,flash-dt)}
+x.fillStyle='#000';x.fillRect(0,0,W,H);x.fillStyle='#ff5555';en.forEach(e=>x.fillRect(e[0]-9,e[1]-9,18,18));x.fillStyle='#00d9ff';bl.forEach(b=>x.fillRect(b[0]-2,b[1],4,12));x.fillStyle='#00ff9c';x.fillRect(px-14,H-30,28,10);x.fillRect(px-4,H-40,8,10);
+if(flash>0){x.strokeStyle='#ffb86c';x.lineWidth=6;x.strokeRect(0,0,W,H)}
+if(over||paused){x.fillStyle='#000a';x.fillRect(0,0,W,H);x.textAlign='center';x.font='26px monospace';x.fillStyle=over?'#ff5555':'#ffb86c';x.fillText(over?'GAME OVER':'PAUSED',W/2,H/2)}});
+mvL=mvR=0;reset();return{pause:()=>!over&&(paused=!paused),restart:reset,stop(){stop();un();clearInterval(fb._i)}}}
+// ---- shell
+const GAMES=[{id:'snake',t:'01 // TERMINAL SNAKE',d:'Classic Snake. Green phosphor edition. Eat packets, grow, survive.',c:'--green',a:'▪▪▪▪●',s:'PLAYABLE',f:snake},
+{id:'matrix',t:'02 // MATRIX TERMINAL',d:'Falling code with a working terminal. Try privacy.',c:'--cyan',a:'0110ｱｲ',s:'EXPLORE',f:matrix},
+{id:'circuit',t:'03 // CIRCUIT BREAKER',d:'Rotate tiles. Connect the source to the output.',c:'--amber',a:'┗━┓┃',s:'PLAYABLE',f:circuit},
+{id:'defender',t:'04 // SYSTEM DEFENDER',d:'Protect the workshop from bugs and rogue packets.',c:'--purple',a:'▲ ▼ ▼',s:'PLAYABLE',f:defender}];
+let cur=null;
+GAMES.forEach(g=>{const k=mk('div',{className:'card'});k.style.setProperty('--ac',`var(${g.c})`);k.innerHTML=`<div class="art m" aria-hidden="true">${g.a}</div><h3>${g.t}</h3><p>${g.d}</p><div class="st m">STATUS: <i>${g.s}</i> · MOBILE: <i>YES</i></div>`;const b=mk('button',{textContent:g.s=='EXPLORE'?'EXPLORE':'PLAY'});b.onclick=()=>open(g);k.append(b);$('#cards').append(k)});
+function close(){if(cur){cur.stop();cur=null}$('#stage').innerHTML='';$('#play').hidden=true}
+function open(g){close();$('#play').hidden=false;$('#pt').textContent=g.t;$('#ps').textContent='';cur=g.f($('#stage'),t=>$('#ps').textContent=t);beep(500,.08);$('#play').scrollIntoView({behavior:RM?'auto':'smooth'})}
+$('#pp').onclick=()=>{cur&&cur.pause();$('#pp').textContent=$('#pp').textContent=='PAUSE'?'RESUME':'PAUSE'};
+$('#pr').onclick=()=>{cur&&cur.restart();$('#pp').textContent='PAUSE'};
+$('#px').onclick=close;
+addEventListener('keydown',e=>{if(e.key=='Escape'&&cur)close();if((e.key=='p'||e.key=='P')&&cur&&document.activeElement.tagName!='INPUT')$('#pp').click()});
+})();
+</script></body></html>

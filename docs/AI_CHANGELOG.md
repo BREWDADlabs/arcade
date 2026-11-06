@@ -23,3 +23,9 @@
 - **Tests:** headless Chromium (system Chrome) at 1280x800 and 390x844, local and on the preview: zero third-party requests, no console or page errors, brand link visible at top, during each of the 4 games and at the bottom, and it navigates to https://brewdadlabs.com/ (click and tap); terminal `home` navigates there too; Snake responds to arrows (no page scroll) and `p` pauses; Matrix `help` lists home; Circuit tile rotates on click/tap; Defender moves/fires on keys and the touch pad; Escape closes a game; game stage sits below the sticky header.
 - **Deploy:** preview branch only (https://preview.brewdadlabs-arcade.pages.dev). No production deploy, no push.
 - **Rollback:** delete branch `nav-home`; production is untouched.
+
+## 2026-11-05 8:15 PM ET, Websites bot (docs: nav is live)
+- **Goal:** Randy: update the repo notes that still said the nav changes were "preview only".
+- **Files:** docs/AI_HANDOFF.md, docs/AI_CHANGELOG.md
+- **Summary:** the nav back to brewdadlabs.com is live on arcade.brewdadlabs.com; handoff now says so. Checked with curl: the live page matches `site/index.html` at 9cc982a.
+- **Deploy:** none (docs only).

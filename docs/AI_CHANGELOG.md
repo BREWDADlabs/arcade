@@ -37,3 +37,11 @@
 - **Tests:** headless Chrome 1280x800 and 390x844, live CSP: 404 status, game runs and throws, no CSP errors, no third-party requests.
 - **Deploy:** none. Needs Randy's OK (preview, then production).
 - **Rollback:** delete `site/404.html` and redeploy, or redeploy the previous deployment.
+
+## 2026-11-05 ~8:42 PM ET, Websites bot (Gorillas 404 → production)
+- **Goal:** Randy approved (widget t162s651 / ask t162u): ship Gorillas 404 to production on arcade (among others).
+- **Files:** docs only here (site/404.html was already on branch `gorillas-404` @ f9e1c80).
+- **Deploy:** production `6f8df4cb-bfaa-436b-a376-a8b38acccffd` via `wrangler pages deploy ./site --project-name=brewdadlabs-arcade --branch=main` from Mac (`f9e1c80`). Preview was `01209036`.
+- **Tests:** curl arcade.brewdadlabs.com `/` → 200 (Arcade title); made-up path → 404 with Gorillas markers.
+- **Rollback:** previous production `51fa1c0a-8cb2-4594-b0f4-6c1ef41f35f2`.
+- **Git:** no BREWDADlabs push from this bot; GitHub bot can merge `gorillas-404` → `main` when ready.

@@ -45,3 +45,11 @@
 - **Tests:** curl arcade.brewdadlabs.com `/` → 200 (Arcade title); made-up path → 404 with Gorillas markers.
 - **Rollback:** previous production `51fa1c0a-8cb2-4594-b0f4-6c1ef41f35f2`.
 - **Git:** no BREWDADlabs push from this bot; GitHub bot can merge `gorillas-404` → `main` when ready.
+
+## 2026-11-05 ~9:00 PM ET, Websites bot (favicon)
+- **Goal:** Randy: all live sites should have good favicons; use the same mint "b" mark as brewdadlabs.com on the arcade.
+- **Files:** site/favicon.ico, site/favicon-32.png, site/apple-touch-icon.png (new, copied from brewdadlabs-site e7d930a); site/index.html (replaced `data:,` icon), site/404.html (link tags); docs.
+- **Deploy:** preview (branch `favicon`) then production (`--branch=main`) from Mac. See AI_HANDOFF.md.
+- **Tests:** curl `/favicon.ico` → image/x-icon (not 404 HTML) on preview and live; homepage link tags present.
+- **Rollback:** previous production `6f8df4cb-bfaa-436b-a376-a8b38acccffd`.
+- **Git:** branch `favicon`; bundle in ~/sites/handoff for the GitHub bot (no BREWDADlabs push from this bot).

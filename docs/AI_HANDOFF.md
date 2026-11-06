@@ -39,7 +39,9 @@ _Last updated: 2026-11-05 (America/New_York)_
 - Same mint "b" BrewDadLabs mark as brewdadlabs.com (Randy approved using the same mark on the arcade). Copied `favicon.ico` (16/32/48), `favicon-32.png`, `apple-touch-icon.png` (180) from brewdadlabs-site `site/` (commit e7d930a).
 - `site/index.html`: blank `<link rel="icon" href="data:,">` replaced with the three link tags used on the main site. `site/404.html`: same three tags added.
 - `/favicon.ico` now returns the icon instead of falling through to the Gorillas 404. CSP unchanged (`img-src 'self'`).
-- Branch `favicon` (from `gorillas-404`). Deploy details in AI_CHANGELOG.md.
+- Branch `favicon` (from `gorillas-404`, commit b094eda).
+- Preview `b47fb83e-8e2d-4f48-b7e4-ed65ed2239a9` (https://favicon.brewdadlabs-arcade.pages.dev). **Production** `30ab07cc-551a-484e-be06-811c3f857a14` (2026-11-05 8:51 PM ET). Curl-verified live: `/favicon.ico` 200 image/vnd.microsoft.icon (16/32/48 ICO), `/favicon-32.png` and `/apple-touch-icon.png` 200 PNG, homepage has the link tags, made-up path still 404 Gorillas.
+- Rollback: redeploy previous production `6f8df4cb-bfaa-436b-a376-a8b38acccffd`.
 
 ## Open items
 - Optionally link https://arcade.brewdadlabs.com from the BrewDadLabs profile README.

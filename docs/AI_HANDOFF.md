@@ -27,5 +27,12 @@ _Last updated: 2026-11-05 (America/New_York)_
 - **Live in production** on arcade.brewdadlabs.com. Rechecked 2026-11-05 8:10 PM ET: the served page is byte-identical to `site/index.html` on `main` (9cc982a), with the `← BREWDADLABS` brand, HOME / PROJECTS / ARCADE nav and exit links. `main` is pushed (origin/main = 9cc982a); the `nav-home` branch is merged.
 - Companion main-site change (ARCADE in the homepage and /projects footers) is also live on brewdadlabs.com.
 
+## Gorillas 404 (branch `gorillas-404`, NOT deployed, 2026-11-05)
+- Adds `site/404.html`: the shared BrewDadLabs Gorillas 404 game, built from `shared/gorillas-404/configs/arcade.json` in brewdadlabs-site (green on black, Share Tech Mono from `/fonts/`, "Back to BrewDadLabs Arcade" plus HOME and PROJECTS links to brewdadlabs.com).
+- Today any unknown path on arcade.brewdadlabs.com returns **200 with the arcade page** (Pages falls back to `index.html` when there is no `404.html`). With this file, unknown paths return a real 404 with the game. The arcade only uses `#` links, so nothing should depend on that fallback.
+- Single-file build; the existing CSP already allows inline script/style, so `_headers` is unchanged.
+- Tested locally in headless Chrome at 1280x800 and 390x844 under the live CSP: status 404, game loads, a throw works, no CSP errors, no other hosts.
+- Ship (needs Randy's OK): `--branch preview` deploy, check https://preview.brewdadlabs-arcade.pages.dev/bananas-xyz, then `--branch main`, then merge this branch.
+
 ## Open items
 - Optionally link https://arcade.brewdadlabs.com from the BrewDadLabs profile README.

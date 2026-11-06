@@ -29,3 +29,11 @@
 - **Files:** docs/AI_HANDOFF.md, docs/AI_CHANGELOG.md
 - **Summary:** the nav back to brewdadlabs.com is live on arcade.brewdadlabs.com; handoff now says so. Checked with curl: the live page matches `site/index.html` at 9cc982a.
 - **Deploy:** none (docs only).
+
+## 2026-11-05 8:20 PM ET, Websites bot (Gorillas 404, branch, not deployed)
+- **Goal:** Randy: roll the Gorillas 404 out to every site.
+- **Files:** site/404.html, docs/AI_HANDOFF.md, docs/AI_CHANGELOG.md
+- **Summary:** added the shared Gorillas 404 built from brewdadlabs-site `shared/gorillas-404/configs/arcade.json`.
+- **Tests:** headless Chrome 1280x800 and 390x844, live CSP: 404 status, game runs and throws, no CSP errors, no third-party requests.
+- **Deploy:** none. Needs Randy's OK (preview, then production).
+- **Rollback:** delete `site/404.html` and redeploy, or redeploy the previous deployment.

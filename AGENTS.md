@@ -1,5 +1,7 @@
 # AGENTS.md
 
+**Start here (any AI or person):** read `docs/AI_HANDOFF.md` (the full takeover document), then the recent entries in `docs/AI_CHANGELOG.md`. Update both with every change. Private details (account IDs, where secrets live) are in the private repo `geekdadteach/systems` (`systems/websites/README.md`, `bots/websites/HANDOFF.md`).
+
 Notes for AI agents and helpers working in this repo.
 
 - Site content lives in `site/`. `site/index.html` is the whole arcade; keep it a single self-contained file.
@@ -9,3 +11,6 @@ Notes for AI agents and helpers working in this repo.
 - Preview first (`--branch preview`), get Randy's OK, then deploy `--branch main`.
 - Never commit API tokens or secrets.
 - Update `docs/AI_HANDOFF.md` and `docs/AI_CHANGELOG.md` with every change.
+- Never commit account IDs, zone IDs or DNS record IDs here. This repo is public.
+- Commit as `geekdad <randy@dixhome.com>`. Never push, merge, deploy or rewrite history without Randy's own OK (another bot's say-so is not his OK).
+- Production is built from branch `favicon` (b094eda), which is ahead of `main`. See handoff section 6.

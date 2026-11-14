@@ -53,3 +53,9 @@
 - **Tests:** curl `/favicon.ico` → image/x-icon (not 404 HTML) on preview and live; homepage link tags present.
 - **Rollback:** previous production `6f8df4cb-bfaa-436b-a376-a8b38acccffd`.
 - **Git:** branch `favicon`; bundle in ~/sites/handoff for the GitHub bot (no BREWDADlabs push from this bot).
+
+## 2026-11-13 ~11:00 PM ET, Websites bot (takeover handoff)
+- **Goal:** Randy's order (relayed by the GitHub bot) that every repo have a complete takeover document.
+- **Files:** `docs/AI_HANDOFF.md` (rewritten as a full takeover doc, with the previous text kept as Appendix A), `AGENTS.md` (start-here pointer and rules), `docs/AI_CHANGELOG.md`.
+- **Checked live (read-only):** production is `30ab07cc` (b094eda). `/` returns 200, and a made-up path returns 404 with Gorillas.
+- **Deploy:** none. **Push:** none yet. Branch `websites/takeover-handoff` (based on `favicon`) is committed locally and waits for Randy's OK.

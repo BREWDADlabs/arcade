@@ -49,16 +49,11 @@ npx wrangler pages deploy site --project-name brewdadlabs-arcade --branch main 2
 
 ## 6. Current live state (2026-11-13)
 - **Production** `30ab07cc-551a-484e-be06-811c3f857a14` (2026-11-05 8:51 PM ET), source `b094eda` on branch `favicon`. The rollback target is `6f8df4cb` (Gorillas 404), and before that `51fa1c0a`.
-- **Git vs production:**
-  - `origin/main` is `9cc982a` (nav back to brewdadlabs.com).
-  - Local `main` is `863e369`, one docs commit ahead and not pushed.
-  - Local `favicon` (`6447ffb`) contains `main` plus the Gorillas 404 (`f9e1c80`) and the favicon (`b094eda`). It is **not pushed** (only `gorillas-404` is on GitHub).
-  - This branch `websites/takeover-handoff` is built on `favicon`.
-  - Merging this branch into `main` (Randy's OK) brings `main` up to production.
+- **Git vs production (corrected 2026-11-14 2:20 AM ET):** `origin/main` is now `6447ffb` (it includes the Gorillas 404 `f9e1c80` and favicon `b094eda` commits), so `main` matches production. Local branches `favicon`, `gorillas-404`, `nav-home` and `backup-local-8d117c2` are merged leftovers.
 - Verified live 2026-11-13: `/` 200, made-up path 404 + Gorillas.
 
 ## 7. Open work / known issues
-- `main` on GitHub is behind production (see above). It needs Randy's OK to push and merge.
+- `main` on GitHub matches production as of 2026-11-14.
 - Optional: link the arcade from the BrewDadLabs GitHub org profile README (`BREWDADlabs/BREWDADlabs`).
 - Old local branches (`nav-home`, `gorillas-404`, `backup-local-8d117c2`) can be deleted once `main` matches production, with Randy's OK.
 

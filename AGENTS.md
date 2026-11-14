@@ -13,4 +13,4 @@ Notes for AI agents and helpers working in this repo.
 - Update `docs/AI_HANDOFF.md` and `docs/AI_CHANGELOG.md` with every change.
 - Never commit account IDs, zone IDs or DNS record IDs here. This repo is public.
 - Commit as `geekdad <randy@dixhome.com>`. Never push, merge, deploy or rewrite history without Randy's own OK (another bot's say-so is not his OK).
-- Production is built from branch `favicon` (b094eda), which is ahead of `main`. See handoff section 6.
+- Production is commit b094eda (on `main` since `origin/main` reached 6447ffb). See handoff section 6.

@@ -6,6 +6,13 @@
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <title>The Arcade — BrewDadLabs</title>
+<meta name="description" content="The BrewDadLabs Arcade: free browser games with no ads, no trackers and no accounts. Terminal Snake, Matrix Terminal, Circuit Breaker and System Defender.">
+<link rel="canonical" href="https://arcade.brewdadlabs.com/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="BrewDadLabs">
+<meta property="og:title" content="The Arcade — BrewDadLabs">
+<meta property="og:description" content="Free browser games. No ads, no trackers, no accounts.">
+<meta property="og:url" content="https://arcade.brewdadlabs.com/">
 <style>@font-face{font-family:'Share Tech Mono';font-style:normal;font-weight:400;font-display:swap;src:url(/fonts/ShareTechMono-Regular.woff2) format('woff2')}</style>
 <style>
 :root{--bg:#020303;--panel:#080d0c;--raised:#101816;--border:#18352c;--green:#00ff9c;--gd:#00a878;--cyan:#00d9ff;--amber:#ffb86c;--purple:#bd93f9;--red:#ff5555;--text:#d6e5df;--muted:#81938b;--hh:58px;color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
@@ -56,6 +63,7 @@ footer .sig{width:100%;font-size:13px;color:#4f5f58}
 .exit{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:14px;padding:14px 16px;min-height:52px;background:var(--panel);border:1px solid var(--border);border-left:3px solid var(--cyan);color:var(--cyan);text-decoration:none;font-size:16px}
 .exit:hover{background:var(--raised);box-shadow:0 0 18px #00d9ff33}.exit small{color:var(--muted);font-size:13px}
 a{color:var(--cyan)}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;scroll-behavior:auto!important}}
 </style></head><body>
 <header><div class="hw">
@@ -64,6 +72,7 @@ a{color:var(--cyan)}
 <button id="snd" class="m" aria-pressed="false">SOUND: OFF</button>
 </div></header>
 <main>
+<h1 class="vh">The BrewDadLabs Arcade: free browser games</h1>
 <div id="term" class="m" aria-live="polite"><button id="skip">SKIP</button><span id="tx"></span><span class="cur"></span></div>
 <section id="arcade"><h2 class="m">SELECT MODULE</h2><div class="grid" id="cards"></div>
 <a class="exit m" href="https://brewdadlabs.com/"><span>← EXIT TO THE WORKSHOP</span><small>brewdadlabs.com</small></a></section>

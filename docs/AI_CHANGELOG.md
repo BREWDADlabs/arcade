@@ -53,3 +53,10 @@
 - **Tests:** curl `/favicon.ico` → image/x-icon (not 404 HTML) on preview and live; homepage link tags present.
 - **Rollback:** previous production `6f8df4cb-bfaa-436b-a376-a8b38acccffd`.
 - **Git:** branch `favicon`; bundle in ~/sites/handoff for the GitHub bot (no BREWDADlabs push from this bot).
+
+## 2026-11-14, Websites takeover bot (review fixes, preview only)
+- **Goal:** site review fixes (Randy: "fix it all"): SEO basics, a page heading, HSTS, sitemap.
+- **Files:** site/index.html (meta description, canonical, Open Graph, visually hidden `<h1>`), site/_headers (`Strict-Transport-Security: max-age=31536000`), site/sitemap.xml (new); docs.
+- **Left alone:** the About line "independent developer, husband and homeschooling dad" (Randy said it can stay).
+- **Deploy:** Pages branch preview `review-fixes` only. Production not deployed; nothing pushed.
+- **Rollback:** drop the preview branch; production is still `30ab07cc-551a-484e-be06-811c3f857a14`.

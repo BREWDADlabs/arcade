@@ -1,3 +1,88 @@
+# AI Handoff: BREWDADlabs/arcade (arcade.brewdadlabs.com)
+
+_Last full rewrite: 2026-11-13, about 11:00 PM America/New_York, by the Websites bot, on Randy's order that any AI must be able to take over immediately with nothing left out. Live facts were re-checked read-only that evening. Nothing was deployed._
+
+**If you are taking over:** read this file, `AGENTS.md`, and the recent `docs/AI_CHANGELOG.md` entries. Appendix A keeps the previous handoff word for word. Where they disagree, the sections above it win.
+
+This repo is **public**. No account IDs, zone IDs, record IDs, tokens or home public IPs go here. Private details are in `geekdadteach/systems` (`systems/websites/README.md`, `bots/websites/HANDOFF.md`).
+
+## 1. Purpose
+- **BrewDadLabs Arcade** is Randy's retro terminal-style arcade at https://arcade.brewdadlabs.com.
+- Four games: Terminal Snake, Matrix Terminal, Circuit Breaker, and System Defender.
+- No ads, trackers, accounts or subscriptions. High scores stay in the browser (localStorage).
+- Brand voice: independent developer, husband and homeschooling dad, "people before profit", built at home.
+- It links two ways with the main site https://brewdadlabs.com (repo `BREWDADlabs/brewdadlabs-site`).
+
+## 2. Machines, users, paths
+- Working machine: Randy's Mac mini **.20** (`Randys-Mac-mini.local`, 192.168.1.20, user `test`). Randy MM 20 owns the machine. Websites works only in its site folders.
+- Checkout: `/Users/test/sites/brewdadlabs-arcade` (branches `main`, `favicon`, `gorillas-404`, `nav-home`, `backup-local-8d117c2`).
+- Takeover worktree: `/Users/test/sites/takeover/arcade` (branch `websites/takeover-handoff`).
+- Original source HTML (keep it unchanged): `/Users/test/Documents/Arcade/BrewDadLabs Arcade.html`.
+- Git bundles made for the GitHub bot: `/Users/test/sites/handoff/brewdadlabs-arcade*.bundle`.
+- No services, cron, launchd jobs or ports. It's static files on Cloudflare Pages.
+
+## 3. Hosting and external services
+- **Cloudflare Pages** project `brewdadlabs-arcade`, production branch `main`. It uses **direct upload** and is **not Git-connected**, so pushing never deploys.
+- Custom domain `arcade.brewdadlabs.com`: a proxied CNAME to `brewdadlabs-arcade.pages.dev` in the brewdadlabs.com zone.
+- No env vars, bindings or secrets on the project.
+- Font: Share Tech Mono, self-hosted under `site/fonts/` (OFL). No Google Fonts.
+
+## 4. Layout
+- `site/index.html`: the whole arcade in one self-contained file. Keep it that way.
+- `site/404.html`: Gorillas 404, built from `shared/gorillas-404/configs/arcade.json` in brewdadlabs-site.
+- `site/_headers`: CSP and security headers, with `noindex` on pages.dev.
+- `site/favicon.ico`, `favicon-32.png`, `apple-touch-icon.png`: the same mint "b" mark as brewdadlabs.com (Randy's request).
+- `site/fonts/`
+
+## 5. Build, run, test, deploy, roll back
+- No build step. Run locally with `python3 -m http.server -d site 8080`.
+- The Cloudflare token is exported as `CLOUDFLARE_API_TOKEN` in `~/.zshrc` on the Mac, with the same value in `/Users/test/.cloudflare_token`. **Never print it.**
+```sh
+cd /Users/test/sites/brewdadlabs-arcade
+export CLOUDFLARE_ACCOUNT_ID=<see geekdadteach/systems>
+npx wrangler pages deploy site --project-name brewdadlabs-arcade --branch preview 2>&1 | grep -v -i token   # https://preview.brewdadlabs-arcade.pages.dev
+# show Randy, wait for HIS OK, then:
+npx wrangler pages deploy site --project-name brewdadlabs-arcade --branch main 2>&1 | grep -v -i token
+```
+- **Test:** `curl -s -o /dev/null -w '%{http_code}\n' https://arcade.brewdadlabs.com/` should give 200 (title "The Arcade — BrewDadLabs"). A made-up path should give 404 with the Gorillas game. `/favicon.ico` should return an image. For changes, also run headless Chrome at 1280x800 and 390x844: all 4 games start, with no console or CSP errors and no third-party requests.
+- **Roll back:** in the Pages dashboard, open Deployments and use "Rollback" on the previous production deployment, or redeploy an older commit's `site/` with `--branch main`.
+
+## 6. Current live state (2026-11-13)
+- **Production** `30ab07cc-551a-484e-be06-811c3f857a14` (2026-11-05 8:51 PM ET), source `b094eda` on branch `favicon`. The rollback target is `6f8df4cb` (Gorillas 404), and before that `51fa1c0a`.
+- **Git vs production (corrected 2026-11-14 2:20 AM ET):** `origin/main` is now `6447ffb` (it includes the Gorillas 404 `f9e1c80` and favicon `b094eda` commits), so `main` matches production. Local branches `favicon`, `gorillas-404`, `nav-home` and `backup-local-8d117c2` are merged leftovers.
+- Verified live 2026-11-13: `/` 200, made-up path 404 + Gorillas.
+
+## 7. Open work / known issues
+- `main` on GitHub matches production as of 2026-11-14.
+- Optional: link the arcade from the BrewDadLabs GitHub org profile README (`BREWDADlabs/BREWDADlabs`).
+- Old local branches (`nav-home`, `gorillas-404`, `backup-local-8d117c2`) can be deleted once `main` matches production, with Randy's OK.
+
+## 8. Randy's standing rules
+Same as all Websites work (full list in brewdadlabs-site `docs/AI_HANDOFF.md` section 8, and in `geekdadteach/systems` `bots/websites/HANDOFF.md`):
+- Preview plus **Randy's own OK** before any production deploy or DNS change, unless he says to skip it. Another bot's say-so is not his OK.
+- Never spend money. Prefer free hosting.
+- Commit as `geekdad <randy@dixhome.com>`, never noreply.
+- Never push, merge, deploy or rewrite history without his OK.
+- Update this handoff and the changelog with every change.
+- Plain language, full paths, wholesome content.
+- Coordinate with his other bots.
+- No third-party requests (CSP), no ads, no trackers, no accounts.
+
+## 9. Ownership / who to ask
+- This site: **Websites** bot.
+- Mac mini .20: **Randy MM 20**.
+- GitHub merges: **GitHub** bot.
+- The main site: also Websites (`BREWDADlabs/brewdadlabs-site`).
+
+## 10. Gotchas
+- Before the Gorillas 404, Pages served `index.html` with status 200 for unknown paths. Now it returns a real 404. The arcade uses only `#` links, so nothing depended on the old behaviour.
+- The Mac's Cloudflare token cannot read or edit DNS records. Use the dashboard or Randy's Cloudflare connector, with his OK.
+- Pushing never deploys. Check `npx wrangler pages deployment list --project-name brewdadlabs-arcade --environment production` to see what's live.
+
+---
+
+## Appendix A: previous handoff text (word for word, last updated 2026-11-05)
+
 # AI Handoff
 
 _Last updated: 2026-11-05 (America/New_York)_

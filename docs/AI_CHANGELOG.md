@@ -60,3 +60,5 @@
 - **Left alone:** the About line "independent developer, husband and homeschooling dad" (Randy said it can stay).
 - **Deploy:** Pages branch preview `review-fixes` only. Production not deployed; nothing pushed.
 - **Rollback:** drop the preview branch; production is still `30ab07cc-551a-484e-be06-811c3f857a14`.
+
+- 2026-11-15 DEPLOYED to production (Randy: 'if it is the right choice'; Claude judged safe). Deployment 70a66161. Previous production kept for rollback in Cloudflare.

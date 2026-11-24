@@ -45,3 +45,6 @@ _Last updated: 2026-11-05 (America/New_York)_
 
 ## Open items
 - Optionally link https://arcade.brewdadlabs.com from the BrewDadLabs profile README.
+
+## 2026-11-14 review fixes (preview only, not in production)
+- Preview `review-fixes`: https://review-fixes.brewdadlabs-arcade.pages.dev. Adds meta description, canonical, Open Graph, hidden h1, HSTS header, sitemap.xml. Production unchanged (`30ab07cc-551a-484e-be06-811c3f857a14`). Needs Randy's OK to deploy `--branch main`.

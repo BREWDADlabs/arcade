@@ -62,3 +62,5 @@
 - **Rollback:** drop the preview branch; production is still `30ab07cc-551a-484e-be06-811c3f857a14`.
 
 - 2026-11-15 DEPLOYED to production (Randy: 'if it is the right choice'; Claude judged safe). Deployment 70a66161. Previous production kept for rollback in Cloudflare.
+
+- 2026-11-23 Pause state fix (preview only, branch feature/pause-reset, https://pause-reset.brewdadlabs-arcade.pages.dev): opening a game now resets the pause button to PAUSE; the label follows the real pause state instead of just flipping; Circuit Breaker has no pause, so its button is disabled. Tested: pause Snake, close, open System Defender shows PAUSE; Defender pause/resume cycles correctly; Matrix pause then Snake shows PAUSE. Production not deployed.

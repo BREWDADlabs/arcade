@@ -168,13 +168,13 @@ mvL=mvR=0;reset();return{pause:()=>!over&&(paused=!paused),restart:reset,stop(){
 // ---- shell
 const GAMES=[{id:'snake',t:'01 // TERMINAL SNAKE',d:'Classic Snake. Green phosphor edition. Eat packets, grow, survive.',c:'--green',a:'▪▪▪▪●',s:'PLAYABLE',f:snake},
 {id:'matrix',t:'02 // MATRIX TERMINAL',d:'Falling code with a working terminal. Try privacy.',c:'--cyan',a:'0110ｱｲ',s:'EXPLORE',f:matrix},
-{id:'circuit',t:'03 // CIRCUIT BREAKER',d:'Rotate tiles. Connect the source to the output.',c:'--amber',a:'┗━┓┃',s:'PLAYABLE',f:circuit},
+{id:'circuit',t:'03 // CIRCUIT BREAKER',d:'Rotate tiles. Connect the source to the output.',c:'--amber',a:'┗━┓┃',s:'PLAYABLE',np:true,f:circuit},
 {id:'defender',t:'04 // SYSTEM DEFENDER',d:'Protect the workshop from bugs and rogue packets.',c:'--purple',a:'▲ ▼ ▼',s:'PLAYABLE',f:defender}];
 let cur=null;
 GAMES.forEach(g=>{const k=mk('div',{className:'card'});k.style.setProperty('--ac',`var(${g.c})`);k.innerHTML=`<div class="art m" aria-hidden="true">${g.a}</div><h3>${g.t}</h3><p>${g.d}</p><div class="st m">STATUS: <i>${g.s}</i> · MOBILE: <i>YES</i></div>`;const b=mk('button',{textContent:g.s=='EXPLORE'?'EXPLORE':'PLAY'});b.onclick=()=>open(g);k.append(b);$('#cards').append(k)});
 function close(){if(cur){cur.stop();cur=null}$('#stage').innerHTML='';$('#play').hidden=true}
-function open(g){close();$('#play').hidden=false;$('#pt').textContent=g.t;$('#ps').textContent='';cur=g.f($('#stage'),t=>$('#ps').textContent=t);beep(500,.08);$('#play').scrollIntoView({behavior:RM?'auto':'smooth'})}
-$('#pp').onclick=()=>{cur&&cur.pause();$('#pp').textContent=$('#pp').textContent=='PAUSE'?'RESUME':'PAUSE'};
+function open(g){close();const pp=$('#pp');pp.textContent='PAUSE';pp.disabled=!!g.np;pp.setAttribute('aria-disabled',!!g.np);pp.title=g.np?'This game has no pause':'';$('#play').hidden=false;$('#pt').textContent=g.t;$('#ps').textContent='';cur=g.f($('#stage'),t=>$('#ps').textContent=t);beep(500,.08);$('#play').scrollIntoView({behavior:RM?'auto':'smooth'})}
+$('#pp').onclick=()=>{if(!cur)return;const r=cur.pause();$('#pp').textContent=r===true?'RESUME':'PAUSE'};
 $('#pr').onclick=()=>{cur&&cur.restart();$('#pp').textContent='PAUSE'};
 $('#px').onclick=close;
 addEventListener('keydown',e=>{if(e.key=='Escape'&&cur)close();if((e.key=='p'||e.key=='P')&&cur&&document.activeElement.tagName!='INPUT')$('#pp').click()});
